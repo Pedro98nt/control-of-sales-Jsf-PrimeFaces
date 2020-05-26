@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Venda</title>
+</h:head>
+<h:body>
+	<h:form>
+	<p:commandLink value="CADASTRO PRODUTO" action="CadastroProduto.xhtml" immediate="true"/> |
+	<p:commandLink value="LISTA PRODUTO" action="listaProduto.xhtml" immediate="true"/> |
+	<p:commandLink value="LISTA VENDA" action="listaVenda.xhtml" immediate="true"/> 
+		<h1>Venda</h1>
+		<p:growl />
+		<p:panelGrid columns="2">
+		
+			<h:outputText value="valor do Produto" />
+			<p:inputText value="#{vendaControllerPedro.venda.valor}"
+				required="true"
+				 requiredMessage="campo obrigatorio" />
+
+	<h:outputText value="Descrição:*" />
+			<p:inputText value="#{vendaControllerPedro.venda.descProduto}"
+				required="true" 
+				requiredMessage="campo obrigatorio" />
+				
+				<h:outputText value="Descrição" />
+				<p:selectOneMenu 
+				value="#{vendaControllerPedro.produtoSelecionado}" 
+				converter="produtoConverter"
+				   required="true" 
+				    requiredMessage="campo obrigatorio">
+				    <f:selectItem itemLabel="SELECIONE" />
+				    <f:selectItems   
+				      value="#{produtoControllerPedro.lista }"
+				    var="produto"
+				    itemLabel=" #{produto.produto}"
+				    itemValue="#{produto}" />
+			</p:selectOneMenu>
+
+		<p:commandButton value="Salvar" action="#{vendaControllerPedro.salvar}" ajax= "false"   />
+			<p:commandButton value="Limpar" action="CadastroVenda.xhtml" 
+			actionListener="#{vendaControllerPedro.limparCampo}" immediate="true"  />
+
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
